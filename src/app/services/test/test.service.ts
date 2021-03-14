@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,11 @@ export class TestService extends BaseService {
   }
 
   findAll() {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      responseType: 'text' as 'json'
+    };
     return this.http
-      .get<String>(this.baseUrl + '/rest/1.0/secure/all');
+      .get<string>(this.baseUrl + '/rest/1.0/secure/all', httpOptions);
   }
 }
